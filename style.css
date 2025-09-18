@@ -112,6 +112,25 @@ input:hover, select:hover, textarea:hover{
   border-radius: 10px;
   border: 1px solid #6a11cb;
 }
+.tassklist{
+  max-width: 300px;
+  padding: 10px;
+}
+.empty{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empty p, h3{
+  color: grey;
+  font-size: 14px;
+}
+.empty i{
+  padding: 20px;
+  color: gray;
+  font-size: 60px;
+}
 @media (max-width: 768px) {
   .container{
     flex-direction: column;
