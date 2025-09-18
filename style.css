@@ -1,0 +1,27 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100% );
+  min-height: 100vh;
+  padding: 20px;
+  color: white;
+}
+.container{
+  height: 100vh;
+  max-width: 800px;
+  margin: auto;
+  justify-content: center;
+}
+.schedule{
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 4px rgba(57, 57, 57, 0.4);
+}
