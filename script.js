@@ -1,69 +1,124 @@
-document.addEventListener('DOMContentLoaded', ()=> {
-const taskList=document.querySelector('.schedule');
+// document.addEventListener('DOMContentLoaded', () => {
+//   console.log('Task Scheduler Ready ✅');
 
- const addTaskBtn= document.querySelector('.sub');
- const container= document.querySelector('.tasks');
- let taskLog=[];
- addTaskBtn.addEventListener('submit', ()=>{
-  const title= document.getElementById('task-title').value;
-  const description= document.getElementById('task-text').value;
-  const Date= document.getElementById('date').value;
-  const Priority= document.getElementById('priority').value;
-  if (!title || !description || !Date || !Priority) return
-  taskLog.push({title, description, Date, Priority})
-  addTaskBtn();
-  document.querySelector('#task-title').value;
-   document.querySelector('#task-text').value;
-    document.querySelector('#date').value;
-     document.querySelector('#priority').value;
- });
- function addTask() {
-  taskList.innerHTML='';
+//   const taskList = document.querySelector('.tasklist');
+//   const addTaskBtn = document.querySelector('.sub');
+//   const filterBtns = document.querySelectorAll('.para .btn');
 
-  taskLog.map((item, index) =>{
-    const taskItemDiv= document.createElement('div');
-    taskItemDiv.classList.add('taskitem');
-    const tasktext= document.createElement('p')
-    tasktext.innerHTML=
-    `<p style="">${item.title} <button>${item.Priority}</button></p>
-    ${item.description}
-    ${item.Date}
-    `
-  })
-//    taskLog.forEach((item, idx) => {
-//     const taskItemDiv = document.createElement('div');
-//     taskItemDiv.classList.add('task-item');
-//     const checkit= document.createElement('div');
-//     checkit.classList.add('checkit');
-//     const checkBox=document.createElement('input');
-//     checkBox.type='checkbox';
-//     checkBox.classList.add('check');
-//     checkBox.onchange= function() {
-//       if (checkBox.checked) {
-//         taskItemDiv.style.opacity='0.5';
-//         taskItemDiv.style.textDecoration='line-through'
-//       } else {
-//          taskItemDiv.style.opacity='1';
-//         taskItemDiv.style.textDecoration='none'
-//       };
-//     }
-//     const tasktext= document.createElement('p');
-//     tasktext.innerHTML = `[${item.taskDate}]  ${item.Task} at ${item.taskTime}`;
-//     checkit.appendChild(checkBox);
-//     checkit.appendChild(tasktext);
-//     const delBtn = document.createElement('button');
-//     delBtn.textContent = 'Delete';
-//     delBtn.classList.add('del')
-//     delBtn.onclick = function() {
-//      taskLog.splice(idx, 1);
-//        localStorage.setItem('tasks', JSON.stringify(taskLog)) 
-//       renderTasks();
-//     };
-      
-//       taskItemDiv.appendChild(checkit);
-//       taskItemDiv.appendChild(delBtn);
-//       taskLoging.appendChild(taskItemDiv);
+//   let tasks = new Map();   // store tasks with IDs
+//   let completed = new Set();
+//   let taskId = 0;
+//   let currentFilter = "taskAll"; // default filter
+
+//   // Add task
+//   addTaskBtn.addEventListener('click', e => {
+//     e.preventDefault(); // prevent form reload
+
+//     const title = document.getElementById('task-title').value.trim();
+//     const description = document.getElementById('task-text').value.trim();
+//     const date = document.getElementById('date').value;
+//     const priority = document.getElementById('priority').value;
+
+//     if (!title || !description || !date || !priority) return;
+
+//     taskId++;
+//     tasks.set(taskId, { title, description, date, priority });
+//     renderTasks();
+
+//     // clear inputs
+//     ['task-title', 'task-text', 'date', 'priority'].forEach(id => 
+//       document.getElementById(id).value = ''
+//     );
 //   });
 
-//  }
-});
+//   // Render tasks (with filtering)
+//   const renderTasks = () => {
+//     taskList.innerHTML = '';
+
+//     // Apply filter
+//     let filtered = [...tasks.entries()].filter(([id, task]) => {
+//       if (currentFilter === "Pending") return !completed.has(id);
+//       if (currentFilter === "completed") return completed.has(id);
+//       if (currentFilter === "prior") return task.priority === "High";
+//       return true; // "taskAll"
+//     });
+
+//     if (filtered.length === 0) {
+//       taskList.innerHTML = `
+//         <div class="empty">
+//           <i class="fas fa-clipboard-list"></i>
+//           <h3>No task yet</h3>
+//           <p>Add a new task to get started</p>
+//         </div>`;
+//       return;
+//     }
+
+//     filtered.forEach(([id, { title, description, date, priority }]) => {
+//       const taskItemDiv = document.createElement('div');
+//       taskItemDiv.classList.add('taskitem');
+//       if (completed.has(id)) taskItemDiv.style.opacity = '0.5';
+
+//       taskItemDiv.innerHTML = `
+//         <p style="display:flex; align-items:center; gap:10px; font-size:18px; color:black;">
+//           ${title} 
+//           <button style="padding:6px 12px; background:${priority === 'High' ? 'red' : priority === 'Medium' ? 'orange' : 'green'}; color:white; border:none; border-radius:6px;">
+//             ${priority}
+//           </button>
+//         </p>
+//         <p>${description}</p>
+//         <p><strong>Due:</strong> ${date}</p>
+//       `;
+
+//       // Delete button
+//       const delBtn = document.createElement('button');
+//       delBtn.textContent = 'Delete';
+//       delBtn.classList.add('delBtn');
+//       delBtn.addEventListener('click', () => {
+//         tasks.delete(id);
+//         completed.delete(id);
+//         renderTasks();
+//       });
+
+//       // Complete button
+//       const completeBtn = document.createElement('button');
+//       completeBtn.textContent = completed.has(id) ? 'Undo' : 'Complete';
+//       completeBtn.classList.add('completeBtn');
+//       completeBtn.addEventListener('click', () => {
+//         if (completed.has(id)) {
+//           completed.delete(id);
+//         } else {
+//           completed.add(id);
+//         }
+//         renderTasks();
+//       });
+
+//       taskItemDiv.append(completeBtn, delBtn);
+//       taskList.appendChild(taskItemDiv);
+//     });
+//   };
+
+//   // Filter button logic
+//   filterBtns.forEach(btn => {
+//     btn.addEventListener('click', () => {
+//       currentFilter = btn.dataset.filter; // update filter
+//       renderTasks();
+//     });
+//   });
+// });
+
+
+document.addEventListener('DOMContentLoaded', ()=>{
+const taskList= document.querySelector('.tasklist')
+const addTaskBtn= document.querySelector(".sub")
+const filterBtn= document. querySelectorAll('.btn')
+//  maps has a key=id and a value=object
+let tasks= new Map();
+// stores id
+let completed= new Set();
+let taskId=0
+let currrentFilter="taskAll"
+addTaskBtn.addEventListener('click', e=>{
+  // prevents the submit button in the form from submitting a form
+  e.preventDefault 
+})
+})
