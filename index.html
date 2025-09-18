@@ -8,23 +8,45 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <h1>Task Scheduler</h1>
+  <p>Organize your task efficiently and boost your productivity</p>
  <section class="container">
    <form action="" class="schedule">
+    <h1>Add New Task</h1>
     <label for="Task">Task Title</label>
-     <input type="text">
-   <label for="Date">Due Date</label>
-    <input type="date" name="" id="">
+     <input type="text" id="task-title">
+    <label for="description">Description</label>
+    <textarea name="" id="task-text" placeholder="Add details about your task"></textarea>
+   <label for="Date">Due Date</label><br>
+    <input type="date" id="date"><br>
    <label for="Priority">Select Priority</label>
-    <select name="" id=""> 
+    <select name="" id="priority"> 
       <option value="High">High</option>
       <option value="Medium">Medium</option>
       <option value="low">Low</option>
     </select>
+    <button class="sub">
+      Add Task
+    </button>
   </form>
   <div class="tasks">
     <h1>Your Tasks</h1>
+    <div class="para">
+      <p>All task</p>
+      <p>Pending</p>
+      <p>completed</p>
+      <p>High priority</p>
+    </div>
+    <div class="tashlist">
+      <div class="empty">
+        <i class="fas fa-clipboard-list"></i>
+        <h3>No task yet</h3>
+        <p>Add a new task to get started</p>
+      </div>
+    </div>
   </div>
   
  </section>
+ <script src="script.js"></script>
 </body>
 </html>
