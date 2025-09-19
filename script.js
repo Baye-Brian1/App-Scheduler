@@ -9,7 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   let completed = new Set();
   let taskId = 0;
   let currentFilter = "taskAll"; // default filter
-
+  const saveState = () => {
+    // converted my map from an array to a string to save to local storage
+    localStorage.setItem("task", JSON.stringify([...tasks]));
+    localStorage.setItem("complete", JSON.stringify([...completed]));
+    localStorage.setItem("taskId", taskId)
+  }
+ const loadState = () =>{
+  // convert back to an array
+    const saveTask = JSON.parse(localStorage.getItem("task") ||"[]");
+    const saveComplete= JSON.parse(localStorage.getItem("complete") || "[]");
+    taskId= Number(localStorage.getItem("taskId"));
+    // convert array to map 
+    tasks = new Map(saveTask); 
+    // convert array to set
+    completed= new Set(saveComplete);
+ }
   // Add task
   addTaskBtn.addEventListener('click', e => {
     e.preventDefault(); // prevent form reload
@@ -24,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     taskId++;
     tasks.set(taskId, { title, description, date, priority });
     renderTasks();
+    saveState();
 
     // clear inputs
     document.getElementById("task-title").value = "";
@@ -81,10 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.delete(id);
         completed.delete(id);
         renderTasks();
+        saveState();
       });
 
       // Complete button
       const completeBtn = document.createElement('button');
+      // if the class having the id is completed show undo if its not show completed
       completeBtn.textContent = completed.has(id) ? 'Undo' : 'Complete';
       completeBtn.classList.add('completeBtn');
       completeBtn.addEventListener('click', () => {
@@ -94,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
           completed.add(id);
         }
         renderTasks();
+        saveState();
       });
       const taskItem= document.createElement('div')
       taskItem.classList.add('taskit')
@@ -110,6 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
       filterBtns.forEach((btn) =>btn.classList.remove('active'));
         btn.classList.add('active');
       renderTasks();
+      saveState();
     });
   });
+  loadState();
+  renderTasks();
 });
