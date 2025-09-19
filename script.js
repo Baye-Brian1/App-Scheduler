@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       currentFilter = btn.dataset.filter; // update filter
       filterBtns.forEach((btn) =>btn.classList.remove('active'));
-      btn.classList.add('active');
+        btn.classList.add('active');
       renderTasks();
     });
   });
